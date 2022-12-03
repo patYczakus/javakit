@@ -1,5 +1,5 @@
 var k2rl06hhodd = { 
-    a: (variable = String(), JSONCode = Boolean(false)) => {
+    get: (variable = String(), JSONCode = Boolean(false)) => {
         if (!variable) return console.error("Missing argument: variable")
 
         var searchExec = location.search.replace("?", "")
@@ -16,7 +16,7 @@ var k2rl06hhodd = {
         
         return _var
     }, 
-    b: (variable = String()) => {
+    has: (variable = String()) => {
         if (!variable) return console.error("Missing argument: variable")
 
         var searchExec = location.search.replace("?", "")
@@ -38,8 +38,14 @@ export const statements = {
     random: function(min = Number(1), max = Number(10)) {
         return Math.round(Math.random() * (max - min)) + min
     },
-    PHPVarExecute: k2rl06hhodd.a,
-    SearchVarExecute: k2rl06hhodd.a,
-    PHPHasVar: k2rl06hhodd.b,
-    SearchHasVar: k2rl06hhodd.b,
+    PHPVar: k2rl06hhodd,
+    SearchVar: k2rl06hhodd,
+    APIResponse: async function(url = String(""), options = JSON) {
+        if (url == "") return console.error(new Error("Missing argument \"url\""))
+        if (!options) var response = await fetch(url)
+        else var response = await fetch(url, options)
+
+        if (response.ok) return response.json()
+        else return new console.warn("HTTP-Error: " + response.status);
+    }
 }
