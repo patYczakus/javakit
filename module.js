@@ -7,7 +7,7 @@ var k2rl06hhodd = {
         var _var = null 
 
         for (var i=0; i<searchExec.length; i++) {
-            if (searchExec[i].startsWith(variable)) {
+            if (searchExec[i].startsWith(`${variable}=`)) {
                 if (JSONCode) _var = { search: searchExec[i], value: encodeURI(searchExec[i].replace(`${variable}=`, "")).replace(/\+/g, " "), variable: variable }
                 else _var = encodeURI(searchExec[i].replace(`${variable}=`, "")).replace(/\+/g, " ")
                 break
@@ -24,7 +24,7 @@ var k2rl06hhodd = {
         var _var = false
 
         for (var i=0; i<searchExec.length; i++) {
-            if (searchExec[i].startsWith(variable)) {
+            if (searchExec[i].startsWith(`${variable}=`)) {
                 _var = true
                 break
             }
@@ -38,8 +38,6 @@ export const statements = {
     random: function(min = Number(1), max = Number(10)) {
         return Math.round(Math.random() * (max - min)) + min
     },
-    PHPVar: k2rl06hhodd,
-    SearchVar: k2rl06hhodd,
     APIResponse: async function(url = String(""), options = JSON) {
         if (url == "") return console.error(new Error("Missing argument \"url\""))
         if (!options) var response = await fetch(url)
@@ -48,4 +46,9 @@ export const statements = {
         if (response.ok) return response.json()
         else return new console.warn("HTTP-Error: " + response.status);
     }
+}
+
+export const HTMLFunctions = {
+    PHPVar: k2rl06hhodd,
+    SearchVar: k2rl06hhodd,
 }
