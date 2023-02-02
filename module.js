@@ -52,29 +52,15 @@ export const HTMLFunctions = {
     PHPVar: k2rl06hhodd,
     SearchVar: k2rl06hhodd,
     copy: (theText) => {
-        var hiddenCopy = document.createElement("div")
+        var hiddenCopy = document.createElement("textarea")
         hiddenCopy.innerHTML = theText
         hiddenCopy.style.display = "none"
-    
-        var currentRange;
-        if (document.getSelection().rangeCount > 0) {
-            currentRange = document.getSelection().getRangeAt(0)
-            window.getSelection().removeRange(currentRange)
-        } else currentRange = false
-    
-        document.body.appendChild(hiddenCopy)
-        var CopyRange = document.createRange()
-        CopyRange.selectNode(hiddenCopy)
-        window.getSelection().addRange(CopyRange)
-    
+        hiddenCopy.select()
         try {
             document.execCommand('copy')
         } catch (err) {
             window.alert("Your Browser Doesn't support this! Error : " + err)
         }
-        window.getSelection().removeRange(CopyRange)
         document.body.removeChild(hiddenCopy)
-
-        if (currentRange) window.getSelection().addRange(currentRange)
     }
 }
