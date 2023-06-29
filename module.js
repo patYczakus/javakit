@@ -34,7 +34,7 @@ var k2rl06hhodd = {
     } 
 }
 
-export const statements = {
+const statements = {
     random: function(min = Number(1), max = Number(10)) {
         return Math.round(Math.random() * (max - min)) + min
     },
@@ -45,22 +45,12 @@ export const statements = {
 
         if (response.ok) return response.json()
         else return new console.warn("HTTP-Error: " + response.status);
-    }
+    },
 }
 
-export const HTMLFunctions = {
+const HTMLFunctions = {
     PHPVar: k2rl06hhodd,
     SearchVar: k2rl06hhodd,
-    copy: (theText) => {
-        var hiddenCopy = document.createElement("textarea")
-        hiddenCopy.innerHTML = theText
-        hiddenCopy.style.display = "none"
-        hiddenCopy.select()
-        try {
-            document.execCommand('copy')
-        } catch (err) {
-            window.alert("Your Browser Doesn't support this! Error : " + err)
-        }
-        document.body.removeChild(hiddenCopy)
-    }
 }
+
+export default { HTMLFunctions, statements }
