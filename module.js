@@ -43,15 +43,10 @@ const HTMLFunctions = {
                     if (JSONCode)
                         _var = {
                             search: searchExec[i],
-                            value: encodeURI(
-                                searchExec[i].replace(`${variable}=`, "")
-                            ).replace(/\+/g, " "),
+                            value: encodeURI(searchExec[i].replace(`${variable}=`, "")).replace(/\+/g, " "),
                             variable: variable,
                         }
-                    else
-                        _var = encodeURI(
-                            searchExec[i].replace(`${variable}=`, "")
-                        ).replace(/\+/g, " ")
+                    else _var = encodeURI(searchExec[i].replace(`${variable}=`, "")).replace(/\+/g, " ")
                     break
                 }
             }
@@ -82,11 +77,11 @@ const HTMLFunctions = {
     },
     /**
      * Czeka na załadowanie multimediów (zdjęć), a po załadowaniu wykonuje funkcję. Możliwe też jest pokazanie ilość pobranych zdjęć
-     * @param {string[]} imageUrlArray Lista zdjęć do załadowania. Może to być tekst, lub kod JSON.
-     * @param {Function} functionToUpdateTheLoader Funkcja aktualizująca wartość; zawiera jeden argument, czyli ilość załadowanych zdjęć
-     * @returns {Promise<HTMLImageElement[]>} Zwraca elementy HTML `<img>`/`<image>` w postaci listy
+     * @param {string[]} imageUrlArray Lista zdjęć do załadowania.
+     * @param {(loadedCount: number) => {}} functionToUpdateTheLoader Funkcja aktualizująca wartość; zawiera jeden argument, czyli ilość załadowanych zdjęć
+     * @returns {Promise<HTMLImageElement[]>} Zwraca elementy HTML `<img>` w postaci listy
      */
-    loadImages: async function (imageUrlArray, functionToUpdateTheLoader) {
+    loadImages: async function (imageUrlArray, functionToUpdateTheLoader = () => {}) {
         const promiseArray = []
         const imageArray = []
         let allLoaded = 0
